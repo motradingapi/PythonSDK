@@ -8,27 +8,26 @@ from MOFSLOPENAPI import MOFSLOPENAPI
 # You will get Your api key from website 
 ApiKey = "" 
 
+
 # userid and password is your trading account username and password
 userid = "" 
 password = ""   
 Two_FA = ""
 vendorinfo = ""
-clientcode = None
+clientcode = None 
 
 # if Your SourceId is web then pass browsername and browser version in case of Desktop you dont need to passanyting
 
 SourceID = "Desktop"            # Web,Desktop
 browsername = "chrome"      
 browserversion = "104"      
-totp = ""   
+totp = ""
  
-
 # NOTE:
 # totp – Send the 6 digit OTP on login using any Authenticator App.
 # OR pass it as blank and verify authtoken by verifyotp with otp received on phone or mail
 # if otp expired use resendotp
  
-
 # # Set Url for LIVE or UAT Testing
 # # Enter Base Url for LIVE or UAT Testing 
 # # 	1. For live 
@@ -43,7 +42,6 @@ Mofsl = MOFSLOPENAPI(ApiKey, Base_Url, clientcode, SourceID, browsername, browse
 
 # Uncomment print statement to execute
 # Loginrequest will always be first request with each following request
-
 
 # Login by Clientcode and password
 print("--------------------------------Login--------------------------------")
@@ -231,14 +229,16 @@ def Broadcast_on_open(ws1):
     # print("########Broadcast_Opened########")
     # print("AuthValidate after connection opened")
 
-    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX
+    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX, BSEFO
     # Exchange Type- CASH,DERIVATIVES   Scrip Code-eg 532540
 
     Mofsl.Register("NSE", "CASH", 11536)
-    Mofsl.Register("BSE", "CASH", 532540)
-    Mofsl.Register("MCX", "DERIVATIVES", 245470)
-    Mofsl.Register("NSEFO", "DERIVATIVES",55917)
-    Mofsl.Register("NCDEX", "DERIVATIVES",59259)
+    # Mofsl.Register("BSE", "CASH", 532540)
+    # Mofsl.Register("MCX", "DERIVATIVES", 245470)
+    # Mofsl.Register("NSEFO", "DERIVATIVES",55917)
+    # Mofsl.Register("NCDEX", "DERIVATIVES",59259)
+    # Mofsl.Register("BSEFO", "DERIVATIVES",873973)
+
     # Mofsl.UnRegister("BSE", "CASH", 532540)
 
 
@@ -328,7 +328,7 @@ Mofsl._TradeStatus_on_close = TradeStatus_on_close
 # # Connect 
 
 # Mofsl.TradeStatus_connect()
-Mofsl.Broadcast_connect()
+# Mofsl.Broadcast_connect()
 
 # --------------------------------------------------------------------------------------------------------
 # -----------------------------------------------TCPSocket------------------------------------------------
@@ -340,14 +340,16 @@ def TCPBroadcast_on_open():
     # print("########TCPBroadcast_Opened########")
     # print("AuthValidate after connection opened")
 
-    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX
+    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX, BSEFO
     # Exchange Type- CASH,DERIVATIVES   Scrip Code-eg 532540
 
     Mofsl.TCPRegister("NSE", "CASH", 11536)
-    Mofsl.TCPRegister("BSE", "CASH", 532540)
-    Mofsl.TCPRegister("MCX", "DERIVATIVES", 245470)
-    Mofsl.TCPRegister("NSEFO", "DERIVATIVES",55917)
-    Mofsl.TCPRegister("NCDEX", "DERIVATIVES",59259)
+    # Mofsl.TCPRegister("BSE", "CASH", 532540)
+    # Mofsl.TCPRegister("MCX", "DERIVATIVES", 245470)
+    # Mofsl.TCPRegister("NSEFO", "DERIVATIVES",55917)
+    # Mofsl.TCPRegister("NCDEX", "DERIVATIVES",59259)
+    # Mofsl.TCPRegister("BSEFO", "DERIVATIVES",873973)
+
     # Mofsl.TCPUnRegister("BSE", "CASH", 532540)
 
 

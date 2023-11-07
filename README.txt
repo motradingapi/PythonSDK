@@ -1,4 +1,4 @@
-Implementation guide sdkversion Python 2.2 Release - 13/06/2023
+Implementation guide sdkversion Python 2.3 Release - 31/08/2023
 
 1. Install required packages 
 	Run following command in terminal to install required packages :

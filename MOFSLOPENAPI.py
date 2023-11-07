@@ -211,10 +211,18 @@ def GetDeviceModel():
 def GetManufacturer():
     try:   
         manufacturer = objsystem.Manufacturer
+        WriteIntoLog("SUCCESS", "MOFSLOPENAPI.py", ("GetManufacturer" +manufacturer) )
+
+        if manufacturer==None:
+           return "unknown"
+        elif len(manufacturer) > 25 or len(manufacturer) < 1:
+            return "unknown"
         return manufacturer
     except Exception as e:
         print(e)
         WriteIntoLog("FAILED", "MOFSLOPENAPI.py", ("GetManufacturer" + str(e)))
+        return "unknown"
+
         # return "Phoenix Technologies LTD"
 
 def GetProductName():
@@ -1506,6 +1514,8 @@ class MOFSLOPENAPI(object):
                 l_exchangeindex = "C"
             elif (l_exchange == "NCDEX"):
                 l_exchangeindex = "D"
+            elif (l_exchange == "BSEFO"):
+                l_exchangeindex = "G"
             else :
                 l_exchangeindex = l_exchange[0]
 
@@ -1540,6 +1550,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+                l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -1572,6 +1584,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+            l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -1595,6 +1609,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+            l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -1773,6 +1789,8 @@ class MOFSLOPENAPI(object):
             l_LTPResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_LTPResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_LTPResponseData["Exchange"] = "BSEFO"
 
               
         # l_LTPResponseData["Exchange"] = l_exchange
@@ -1825,6 +1843,8 @@ class MOFSLOPENAPI(object):
             l_MarketDepthResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_MarketDepthResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_MarketDepthResponseData["Exchange"] = "BSEFO"
 
 
         # l_MarketDepthResponseData["Exchange"] = l_exchange
@@ -1891,6 +1911,8 @@ class MOFSLOPENAPI(object):
             l_DayOHLCResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_DayOHLCResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_DayOHLCResponseData["Exchange"] = "BSEFO"
 
         # l_DayOHLCResponseData["Exchange"] = l_exchange
         l_DayOHLCResponseData["Scrip Code"] = l_scrip
@@ -1936,6 +1958,8 @@ class MOFSLOPENAPI(object):
             l_DPRResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_DPRResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_DPRResponseData["Exchange"] = "BSEFO"
 
         # l_DPRResponseData["Exchange"] = l_exchange
         l_DPRResponseData["Scrip Code"] = l_scrip
@@ -1985,7 +2009,9 @@ class MOFSLOPENAPI(object):
         elif l_exchange == "D":
             l_IndexResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
-            l_IndexResponseData["Exchange"] = "NSECD" 
+            l_IndexResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_IndexResponseData["Exchange"] = "BSEFO" 
 
         # l_IndexResponseData["Exchange"] = l_exchange
         l_IndexResponseData["Scrip Code"] = l_scrip
@@ -2027,6 +2053,8 @@ class MOFSLOPENAPI(object):
                 l_OpenInterestResponseData["Exchange"] = "NCDEX"
             elif l_exchange == "C":
                 l_OpenInterestResponseData["Exchange"] = "NSECD"
+            elif l_exchange == "G":
+                l_OpenInterestResponseData["Exchange"] = "BSEFO"
 
 
             # l_OpenInterestResponseData["Exchange"] = l_exchange
@@ -2381,6 +2409,8 @@ class MOFSLOPENAPI(object):
                 l_exchangeindex = "C"
             elif (l_exchange == "NCDEX"):
                 l_exchangeindex = "D"
+            elif (l_exchange == "BSEFO"):
+                l_exchangeindex = "G"
             else :
                 l_exchangeindex = l_exchange[0]
 
@@ -2415,6 +2445,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+            l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -2447,6 +2479,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+            l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -2470,6 +2504,8 @@ class MOFSLOPENAPI(object):
             l_exchangeindex = "C"
         elif (l_exchange == "NCDEX"):
             l_exchangeindex = "D"
+        elif (l_exchange == "BSEFO"):
+            l_exchangeindex = "G"
         else :
             l_exchangeindex = l_exchange[0]
 
@@ -2655,6 +2691,8 @@ class MOFSLOPENAPI(object):
             l_LTPResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_LTPResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_LTPResponseData["Exchange"] = "BSEFO"
 
               
         # l_LTPResponseData["Exchange"] = l_exchange
@@ -2707,6 +2745,8 @@ class MOFSLOPENAPI(object):
             l_MarketDepthResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_MarketDepthResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_MarketDepthResponseData["Exchange"] = "BSEFO"
 
 
         # l_MarketDepthResponseData["Exchange"] = l_exchange
@@ -2773,6 +2813,8 @@ class MOFSLOPENAPI(object):
             l_DayOHLCResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_DayOHLCResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_MarketDepthResponseData["Exchange"] = "BSEFO"
 
         # l_DayOHLCResponseData["Exchange"] = l_exchange
         l_DayOHLCResponseData["Scrip Code"] = l_scrip
@@ -2818,6 +2860,8 @@ class MOFSLOPENAPI(object):
             l_DPRResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
             l_DPRResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_DPRResponseData["Exchange"] = "BSEFO"
 
         # l_DPRResponseData["Exchange"] = l_exchange
         l_DPRResponseData["Scrip Code"] = l_scrip
@@ -2867,7 +2911,9 @@ class MOFSLOPENAPI(object):
         elif l_exchange == "D":
             l_IndexResponseData["Exchange"] = "NCDEX"
         elif l_exchange == "C":
-            l_IndexResponseData["Exchange"] = "NSECD" 
+            l_IndexResponseData["Exchange"] = "NSECD"
+        elif l_exchange == "G":
+            l_IndexResponseData["Exchange"] = "BSEFO" 
 
         # l_IndexResponseData["Exchange"] = l_exchange
         l_IndexResponseData["Scrip Code"] = l_scrip
@@ -2911,6 +2957,8 @@ class MOFSLOPENAPI(object):
                 l_OpenInterestResponseData["Exchange"] = "NCDEX"
             elif l_exchange == "C":
                 l_OpenInterestResponseData["Exchange"] = "NSECD"
+            elif l_exchange == "G":
+                l_OpenInterestResponseData["Exchange"] = "BSEFO"
 
 
             # l_OpenInterestResponseData["Exchange"] = l_exchange
