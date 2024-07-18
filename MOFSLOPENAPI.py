@@ -248,12 +248,16 @@ def GetLatitudeLongitude():
         ipaddress = geocoder.ip('me')
         lst_latlng = ipaddress.latlng
         # print(var[0],var[1] )
+        if lst_latlng == None:
+            lst_latlng = [19.0760, 72.8777]
         return lst_latlng
     except Exception as e:
         WriteIntoLog("FAILED", "MOFSLOPENAPI.py", ("GetLongitudeLatitude" + str(e)))
         ipaddress = geocoder.ip('106.193.137.95') #106.193.137.95
         lst_latlng = ipaddress.latlng
         # print(var[0],var[1] )
+        if lst_latlng == None:
+            lst_latlng = [19.0760, 72.8777]
         return lst_latlng
 
 
@@ -284,6 +288,7 @@ class MOFSLOPENAPI(object):
     m_productversion = ""
     m_latitudelongitude = ""
 
+    m_MaxBroadcastLimit = 0        # self.getbroadcastmaxlimit(self.m_clientcodeDealer)
     m_scriptask = ""
     m_TCPscriptask = ""
     m_indextask = ""
@@ -1491,12 +1496,13 @@ class MOFSLOPENAPI(object):
     def Register(self, f_exchange, f_exchangetype, f_scriptcode):
         self.m_scriptask = "D"
 
-        try:
-            l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
-            l_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
-        except Exception as e:
-            WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
-            l_MaxBroadcastLimit = 0
+        l_MaxBroadcastLimit = self.m_MaxBroadcastLimit
+        # try:
+        #     l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
+        #     l_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
+        # except Exception as e:
+        #     WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
+        #     l_MaxBroadcastLimit = 0
        
 
         if l_MaxBroadcastLimit == 0 :
@@ -1637,7 +1643,7 @@ class MOFSLOPENAPI(object):
                 self.q_msg.put(i)
                 if len(self.q_msg) == 30:
                         self.Packet_Parsing(self.q_msg)
-                        self.q_msg.get(q_msg[o:30]) 
+                        self.q_msg.get(self.q_msg[0:30]) 
 
 
     def Packet_Parsing(self, message):
@@ -2196,6 +2202,13 @@ class MOFSLOPENAPI(object):
 
 
     def Broadcast_connect(self):
+        try:
+            l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
+            self.m_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
+        except Exception as e:
+            WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
+            self.m_MaxBroadcastLimit = 0
+
         t1 = Thread(target=self.Websocket1_connect)        
         # starting thread 1
         t1.start()
@@ -2386,12 +2399,13 @@ class MOFSLOPENAPI(object):
     def TCPRegister(self, f_exchange, f_exchangetype, f_scriptcode):
         self.m_TCPscriptask = "D"
 
-        try:
-            l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
-            l_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
-        except Exception as e:
-            WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
-            l_MaxBroadcastLimit = 0
+        l_MaxBroadcastLimit = self.m_MaxBroadcastLimit
+        # try:
+        #     l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
+        #     l_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
+        # except Exception as e:
+        #     WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
+        #     l_MaxBroadcastLimit = 0
        
 
         if l_MaxBroadcastLimit == 0 :
@@ -2814,7 +2828,7 @@ class MOFSLOPENAPI(object):
         elif l_exchange == "C":
             l_DayOHLCResponseData["Exchange"] = "NSECD"
         elif l_exchange == "G":
-            l_MarketDepthResponseData["Exchange"] = "BSEFO"
+            l_DayOHLCResponseData["Exchange"] = "BSEFO"
 
         # l_DayOHLCResponseData["Exchange"] = l_exchange
         l_DayOHLCResponseData["Scrip Code"] = l_scrip
@@ -2981,6 +2995,12 @@ class MOFSLOPENAPI(object):
         # t1 = Thread(target=self.Websocket1_connect)        
         # # starting thread 1
         # t1.start()
+        try:
+            l_DICT_MaxBroadcastLimit = self.getbroadcastmaxlimit(self.m_clientcodeDealer)
+            self.m_MaxBroadcastLimit = l_DICT_MaxBroadcastLimit["data"]["MaxBroadcastLimit"]
+        except Exception as e:
+            WriteIntoLog_Broadcast("FAILED", "MOFSLOPENAPI.py", str(e))
+            self.m_MaxBroadcastLimit = 0
         
         if self.AttemptCountSocket <=5:
             # HOST = "127.0.0.1"  # The server's hostname or IP address

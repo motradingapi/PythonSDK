@@ -5,19 +5,17 @@
 
 from MOFSLOPENAPI import MOFSLOPENAPI
 
-# You will get Your api key from website 
+# # You will get Your api key from website 
 ApiKey = "" 
 
-
-# userid and password is your trading account username and password
+# # userid and password is your trading account username and password
 userid = "" 
 password = ""   
 Two_FA = ""
 vendorinfo = ""
 clientcode = None 
 
-# if Your SourceId is web then pass browsername and browser version in case of Desktop you dont need to passanyting
-
+# # if Your SourceId is web then pass browsername and browser version in case of Desktop you dont need to passanyting
 SourceID = "Desktop"            # Web,Desktop
 browsername = "chrome"      
 browserversion = "104"      
@@ -229,16 +227,14 @@ def Broadcast_on_open(ws1):
     # print("########Broadcast_Opened########")
     # print("AuthValidate after connection opened")
 
-    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX, BSEFO
+    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX
     # Exchange Type- CASH,DERIVATIVES   Scrip Code-eg 532540
 
     Mofsl.Register("NSE", "CASH", 11536)
-    # Mofsl.Register("BSE", "CASH", 532540)
-    # Mofsl.Register("MCX", "DERIVATIVES", 245470)
-    # Mofsl.Register("NSEFO", "DERIVATIVES",55917)
-    # Mofsl.Register("NCDEX", "DERIVATIVES",59259)
-    # Mofsl.Register("BSEFO", "DERIVATIVES",873973)
-
+    Mofsl.Register("BSE", "CASH", 532540)
+    Mofsl.Register("MCX", "DERIVATIVES", 245470)
+    Mofsl.Register("NSEFO", "DERIVATIVES",55917)
+    Mofsl.Register("NCDEX", "DERIVATIVES",59259)
     # Mofsl.UnRegister("BSE", "CASH", 532540)
 
 
@@ -340,16 +336,14 @@ def TCPBroadcast_on_open():
     # print("########TCPBroadcast_Opened########")
     # print("AuthValidate after connection opened")
 
-    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX, BSEFO
+    # Exchange -BSE, NSE, NSEFO, MCX, NSECD, NCDEX
     # Exchange Type- CASH,DERIVATIVES   Scrip Code-eg 532540
 
     Mofsl.TCPRegister("NSE", "CASH", 11536)
-    # Mofsl.TCPRegister("BSE", "CASH", 532540)
-    # Mofsl.TCPRegister("MCX", "DERIVATIVES", 245470)
-    # Mofsl.TCPRegister("NSEFO", "DERIVATIVES",55917)
-    # Mofsl.TCPRegister("NCDEX", "DERIVATIVES",59259)
-    # Mofsl.TCPRegister("BSEFO", "DERIVATIVES",873973)
-
+    Mofsl.TCPRegister("BSE", "CASH", 532540)
+    Mofsl.TCPRegister("MCX", "DERIVATIVES", 245470)
+    Mofsl.TCPRegister("NSEFO", "DERIVATIVES",55917)
+    Mofsl.TCPRegister("NCDEX", "DERIVATIVES",59259)
     # Mofsl.TCPUnRegister("BSE", "CASH", 532540)
 
 
