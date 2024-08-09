@@ -31,8 +31,8 @@ totp = ""
 # # 	1. For live 
 # # 	   Base_Url = "https://openapi.motilaloswal.com"
 # # 	2. For UAT
-# # 	   Base_Url = "https://uatopenapi.motilaloswal.com"
-Base_Url = "https://uatopenapi.motilaloswal.com"
+# # 	   Base_Url = "https://openapi.motilaloswaluat.com"
+Base_Url = "https://openapi.motilaloswaluat.com"
 
 
 # Initialize MofslOpenApi using Apikey, Base_Url and clientcode 

@@ -500,7 +500,7 @@ class MOFSLOPENAPI(object):
 
                 "latitude": str("%.4f" % self.m_latitudelongitude[0]),
                 "longitude": str("%.4f" % self.m_latitudelongitude[1]),
-                "sdkversion":"Python 2.1"
+                "sdkversion":"Python 3.0"
 
                 # "browsername": self.m_browsername,
                 # "browserversion": self.m_browserversion,
@@ -2101,15 +2101,18 @@ class MOFSLOPENAPI(object):
 
 
     def TradeSubscribe(self):
-        l_data = {
+        if self.m_strMOFSLToken:
+            l_data = {
             "clientid" : self.m_clientcode,
             "action" : "TradeSubscribe"
-        }
+            }
 
-        j_data = json.dumps(l_data)
-        self.ws2.send(j_data)
-        WriteIntoLog_TradeStatus("SUCCESS", "MOFSLOPENAPI.py", "TradeSubscribe Packet Sent")
-        # print(j_data)
+            j_data = json.dumps(l_data)
+            self.ws2.send(j_data)
+            WriteIntoLog_TradeStatus("SUCCESS", "MOFSLOPENAPI.py", "TradeSubscribe Packet Sent")
+            # print(j_data)
+        else:
+            print({'status': 'ERROR', 'message': 'Authorization is InVaild In Header Parameter', 'errorcode': '', 'data': None})
 
     def TradeUnsubscribe(self):
         l_data = {
@@ -2122,15 +2125,18 @@ class MOFSLOPENAPI(object):
         WriteIntoLog_TradeStatus("SUCCESS", "MOFSLOPENAPI.py", "TradeUnSubscribe Packet Sent")
 
     def OrderSubscribe(self):
-        l_data = {
+        if self.m_strMOFSLToken:
+            l_data = {
             "clientid" : self.m_clientcode,
             "action" : "OrderSubscribe"
-        }
+            }
 
-        j_data = json.dumps(l_data)
-        self.ws2.send(j_data)
-        WriteIntoLog_TradeStatus("SUCCESS", "MOFSLOPENAPI.py", "OrderUnsubscribe Packet Sent")
-        # print(j_data)
+            j_data = json.dumps(l_data)
+            self.ws2.send(j_data)
+            WriteIntoLog_TradeStatus("SUCCESS", "MOFSLOPENAPI.py", "OrderUnsubscribe Packet Sent")
+            # print(j_data)
+        else:
+            print({'status': 'ERROR', 'message': 'Authorization is InVaild In Header Parameter', 'errorcode': '', 'data': None})
 
     def OrderUnsubscribe(self):
         l_data = {
@@ -2183,8 +2189,8 @@ class MOFSLOPENAPI(object):
 
     def Websocket2_connect(self):
 
-        if self.m_Base_Url == "https://uatopenapi.motilaloswal.com":
-            l_TradeStatus_connect_URL = "wss://uatopenapi.motilaloswal.com/ws"
+        if self.m_Base_Url == "https://openapi.motilaloswaluat.com":
+            l_TradeStatus_connect_URL = "wss://openapi.motilaloswaluat.com/ws"
         elif self.m_Base_Url == "https://openapi.motilaloswal.com":
             l_TradeStatus_connect_URL = "wss://openapi.motilaloswal.com/ws"
         else:

@@ -1,4 +1,4 @@
-Implementation guide sdkversion Python 2.3 Release - 31/08/2023
+Implementation guide sdkversion Python 3.0 Release - 31/07/2024
 
 1. Install required packages 
 	Run following command in terminal to install required packages :
@@ -18,7 +18,7 @@ Implementation guide sdkversion Python 2.3 Release - 31/08/2023
 	1. For live 
 	   Base_Url = "https://openapi.motilaloswal.com"
 	2. For UAT
-	   Base_Url = "https://uatopenapi.motilaloswal.com"
+	   Base_Url = "https://openapi.motilaloswaluat.com"
 
 5. Initialize MofslOpenApi
 	Initialize MofslOpenApi using Apikey and Base_Url
