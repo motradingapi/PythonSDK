@@ -8,7 +8,7 @@ import socket
 import re, uuid
 import hashlib
 import platform
-import wmi
+# import wmi
 import geocoder
 
 import websocket
@@ -168,13 +168,14 @@ def GetPublicIPAddress():
 
 # System Info
 
-c = wmi.WMI()   
-objsystem = c.Win32_ComputerSystem()[0]
-system = platform.uname()
+# c = wmi.WMI()   
+# objsystem = c.Win32_ComputerSystem()[0]
+# system = platform.uname()
 
 def GetOsName():
     try:        
-        osname = system.system
+        # osname = system.system
+        osname = "Ubuntu 20.04.3 LTS"
         return osname
     except Exception as e:
         print(e)
@@ -183,7 +184,8 @@ def GetOsName():
 
 def GetOsVersion():
     try:        
-        osversion = system.version
+        # osversion = system.version
+        osversion= "20.04"
         return osversion
     except Exception as e:
         print(e)
@@ -201,7 +203,8 @@ def GetInstalledAppid():
 
 def GetDeviceModel():
     try:   
-        devicemodel = objsystem.Model     
+        # devicemodel = objsystem.Model     
+        devicemodel = "VMware Virtual Platform"
         return devicemodel
     except Exception as e:
         print(e)
@@ -210,7 +213,8 @@ def GetDeviceModel():
 
 def GetManufacturer():
     try:   
-        manufacturer = objsystem.Manufacturer
+        # manufacturer = objsystem.Manufacturer
+        manufacturer = "unknown"
         WriteIntoLog("SUCCESS", "MOFSLOPENAPI.py", ("GetManufacturer" +manufacturer) )
 
         if manufacturer==None:
@@ -245,8 +249,8 @@ def GetProductVersion():
 
 def GetLatitudeLongitude():
     try:   
-        ipaddress = geocoder.ip('me')
-        lst_latlng = ipaddress.latlng
+        # ipaddress = geocoder.ip('me')
+        lst_latlng = [0,0]
         # print(var[0],var[1] )
         if lst_latlng == None:
             lst_latlng = [19.0760, 72.8777]
@@ -1546,6 +1550,8 @@ class MOFSLOPENAPI(object):
 
         else :
             print("Scrip count is greater than max limit")
+            Log_Message = ("Script %d Register Failed, Scrip count is greater than max limit"%(f_scriptcode))
+            WriteIntoLog_Broadcast("Info", "MOFSLOPENAPI.py", Log_Message)
 
     def UnRegister(self, f_exchange, f_exchangetype, f_scriptcode):
         self.m_scriptask = "D"
@@ -2138,6 +2144,7 @@ class MOFSLOPENAPI(object):
         else:
             print({'status': 'ERROR', 'message': 'Authorization is InVaild In Header Parameter', 'errorcode': '', 'data': None})
 
+
     def OrderUnsubscribe(self):
         l_data = {
             "clientid" : self.m_clientcode,
@@ -2455,7 +2462,9 @@ class MOFSLOPENAPI(object):
 
         else :
             print("TCPScrip count is greater than max limit")
-
+            Log_Message = ("Script %d Register Failed, Scrip count is greater than max limit"%(f_scriptcode))
+            WriteIntoLog_Broadcast("Info", "MOFSLOPENAPI.py", Log_Message)
+            
     def TCPUnRegister(self, f_exchange, f_exchangetype, f_scriptcode):
         self.m_scriptask = "D"
         self.l_TCPscrip_code.remove(f_scriptcode)
