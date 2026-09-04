@@ -525,7 +525,7 @@ class MOFSLOPENAPI(object):
 
                 "latitude": str("%.4f" % self.m_latitudelongitude[0]),
                 "longitude": str("%.4f" % self.m_latitudelongitude[1]),
-                "sdkversion":"Python 4.0",
+                "sdkversion":"Python 5.0",
                 "accesstoken": self.m_strAccessToken
 
                 # "browsername": self.m_browsername,
@@ -1619,7 +1619,7 @@ class MOFSLOPENAPI(object):
         len(clientcode), clientcode_buffer2, 1, 1, 1, len(Websocket_version), version_buffer, 0, 0, 0, 0, 1, padding)
         # print(LoginPacket)
         self.ws1.send(LoginPacket)
-        WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", "Login Packet Sent")
+        WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", "Login Packet Sent from on open ")
         # print("Login Packet sent")
 
     def ReLogin_on_error(self):
@@ -1680,9 +1680,9 @@ class MOFSLOPENAPI(object):
                 AddToList = 1
                 
                 RegisterPacket = pack("=cHcciB", msg_type, 7, exchange, exchangetype, script, AddToList)
-                self.Login_on_open()
+                # self.Login_on_open() #kamana 
                 self.ws1.send(RegisterPacket)
-                Log_Message = ("Script %d Register Packet Sent"%(f_scriptcode))
+                Log_Message = ("Script %d Register Packet Sent (count=%d/%d)"%(f_scriptcode, len(self.l_scrip_code), MaxBroadcastLimit))
                 WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", Log_Message)
                 # print(RegisterPacket)
                 # print("Register Packet sent")
@@ -1719,7 +1719,7 @@ class MOFSLOPENAPI(object):
 
             UnRegisterPacket = pack("=cHcciB", msg_type, 7, exchange, exchangetype, script, AddToList)
             # print(UnRegisterPacket)
-            self.Login_on_open()
+            # self.Login_on_open() #kamana 
             self.ws1.send(UnRegisterPacket)
             Log_Message = ("Script %d UnRegister Packet Sent"%(f_scriptcode))
             WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", Log_Message)
@@ -1745,7 +1745,7 @@ class MOFSLOPENAPI(object):
         self.l_exchange_index.append(l_exchangeindex)
         
         if self.m_strMOFSLToken:
-            self.Login_on_open()
+            # self.Login_on_open() //kamana
             Log_Message = ("Index %s Register Packet Sent"%(f_exchange))
             WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", Log_Message)
             # print("IndexRegister Packet sent")
@@ -2383,6 +2383,8 @@ class MOFSLOPENAPI(object):
         else:
             
             WriteIntoLog_Broadcast("SUCCESS", "MOFSLOPENAPI.py", "Broadcast Connection Opened")
+            if self.m_strMOFSLToken:
+                self.Login_on_open()
             self._Broadcast_on_open(ws1)
 
             if self.BroadcastAutoRelogin_flag:
